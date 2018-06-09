@@ -12,14 +12,14 @@ class SessionManager
     sessionId = null
     sessionUsr =
     {
-      usr: 'N/A',
-      name: 'N/A',
-      firstname: 'N/A',
-      lastname: 'N/A',
+      usr: 'ghost',
+      name: 'Casper Ndlovu',
+      firstname: 'Casper',
+      lastname: 'Ndlovu',
       cell: 'N/A',
       tel: 'N/A',
       email: 'N/A',
-      access_level: 0
+      access_level: 3
     }
     sessionDate = 0
     sessionTtl = 0

@@ -9,6 +9,7 @@ import VeeValidate from 'vee-validate'
 // Import custom components
 import Home from '@/components/Home'
 import Factories from '@/components/Factories'
+import Factory from '@/components/Factory'
 import About from '@/components/About'
 import AdminFactories from '@/components/Admin/Factories'
 import Overview from '@/components/Admin/Overview'
@@ -27,6 +28,7 @@ Vue.use(Meta, {
 })
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -37,6 +39,11 @@ export default new Router({
       path: '/factories',
       name: 'Factories',
       component: Factories
+    },
+    {
+      path: '/factory',
+      name: 'Factory',
+      component: Factory
     },
     {
       path: '/about',

@@ -1,0 +1,1 @@
+curl -X PUT -H "session_id: 0" -H "Content-Type: application/json" http://localhost:8080/factory/product -d "{\"product_name\":\"f1\", \"factory_id\":\"0\", \"category\":\"cat1\", \"description\": \"some product\", \"unit\":\"ea\", \"date_established\": \"1\", \"creator\": \"ghost\"}"

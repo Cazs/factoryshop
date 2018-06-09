@@ -9,49 +9,55 @@
                 <form role="form" method="post" @submit.prevent="addFactory">
                     <div class="form-group">
                         <label>Factory name*</label>
-                        <input type="text" v-validate="'required'" v-model="factory.name" name="name" class="form-control" placeholder="Enter factory's Name"/>
-                        <span style="color:red;" v-show="errors.has('name')">{{ errors.first('name') }}</span>
-                    </div>
-                    <div class="form-group">
-                        <label>Location*</label>
-                        <input type="text" v-validate="'required'" v-model="factory.location" name="location" class="form-control" placeholder="Enter factory's address"/>
-                        <span style="color:red;" v-show="errors.has('location')">{{ errors.first('location') }}</span>
+                        <input type="text" v-validate="'required'" v-model="newFactory.factory_name" name="factory_name" class="form-control" placeholder="Enter factory's Name"/>
+                        <span style="color:red;" v-show="errors.has('factory_name')">{{ errors.first('factory_name') }}</span>
                     </div>
                     <div class="form-group">
                         <label>Industry*</label>
-                        <input type="text" v-validate="'required'" v-model="factory.industry" name="industry" class="form-control" placeholder="Enter industry/specialty"/>
+                        <input type="text" v-validate="'required'" v-model="newFactory.industry" name="industry" class="form-control" placeholder="Enter industry/specialty"/>
                         <span style="color:red;" v-show="errors.has('industry')">{{ errors.first('industry') }}</span>
                     </div>
                     <div class="form-group">
+                        <label>physical Address*</label>
+                        <input type="text" v-validate="'required'" v-model="newFactory.physical_address" name="physical_address" class="form-control" placeholder="Enter factory's address"/>
+                        <span style="color:red;" v-show="errors.has('physical_address')">{{ errors.first('physical_address') }}</span>
+                    </div>
+                    <div class="form-group">
                         <label class="label" for="email">Contact eMail</label>
-                        <input type="email" v-validate="'required|email'" :class="{'input': true, 'danger': errors.has('email') }" v-model="factory.email" name="email" class="form-control" placeholder="Enter contact email for factory representative."/>
+                        <input type="email" v-validate="'required|email'" :class="{'input': true, 'danger': errors.has('email') }" v-model="newFactory.email" name="email" class="form-control" placeholder="Enter contact email for factory representative."/>
                         <span style="color:red;" v-show="errors.has('email')" class="help danger">{{ errors.first('email') }}</span>
                     </div>
                     <div class="form-group">
+                        <label class="label" for="tel">Tel No.</label>
+                        <input type="tel" v-validate="'required'" :class="{'input': true, 'danger': errors.has('tel') }" v-model="newFactory.tel" name="tel" class="form-control" placeholder="Enter contact tel number for factory."/>
+                        <span style="color:red;" v-show="errors.has('tel')" class="help danger">{{ errors.first('tel') }}</span>
+                    </div>
+                    <div class="form-group">
                         <label class="label" for="date_established">Date Established*</label>
-                        <input type="hidden" name="date_limit" value="2018-03-20">
-                        <input type="date" v-validate="'before:date_limit|date_format:YYYY-MM-DD'" data-vv-as="Date Est." v-model="factory.date_established" name="date_established" class="form-control" placeholder="Birth day">
+                        <input type="hidden" name="max_date" value="2019-06-10">
+                        <input type="hidden" name="min_date" value="2018-06-10">
+                        <input type="date" v-validate="'before:max_date|after:min_date|date_format:YYYY-MM-DD'" data-vv-as="date established" v-model="newFactory.date_established" name="date_established" class="form-control" placeholder="Date Established">
                         <span style="color:red;" v-show="errors.has('date_established')">{{ errors.first('date_established') }}</span>
                     </div>
                     <div class="form-group">
                         <label>Registration Number*</label>
-                        <input type="text" v-model="factory.reg_number" name="reg_number" class="form-control" placeholder="Enter factory's registration Number"/>
+                        <input type="text" v-model="newFactory.registration_number" name="registration_number" class="form-control" placeholder="Enter factory's registration Number"/>
                     </div>
                     <div class="form-group">
                         <label>Tax Number*</label>
-                        <input type="text" v-model="factory.tax_number" name="tax_number" class="form-control" placeholder="Enter factory's tax Number"/>
+                        <input type="text" v-model="newFactory.tax_number" name="tax_number" class="form-control" placeholder="Enter factory's tax Number"/>
                     </div>
                     <div class="form-group">
                         <label>Delivery Range</label>
-                        <input type="number" v-validate="'required'" v-model="factory.delivery_range" name="delivery_range" class="form-control" placeholder="Enter delivery range in KM"/>
+                        <input type="number" v-validate="'required'" v-model="newFactory.delivery_range" name="delivery_range" class="form-control" placeholder="Enter delivery range in KM"/>
                         <span style="color:red;" v-show="errors.has('delivery_range')">{{ errors.first('delivery_range') }}</span>
                     </div>
                     <div class="form-group">
                         <label>Order cost eligible for delivery (in ZAR)</label>
-                        <input type="text" v-validate="'required'" v-model="factory.min_delivery_cost" name="min_delivery_cost" class="form-control" placeholder="What's the minimum order cost that the factory is willing to do a delivery?"/>
-                        <span style="color:red;" v-show="errors.has('min_delivery_cost')">{{ errors.first('min_delivery_cost') }}</span>
+                        <input type="text" v-validate="'required'" v-model="newFactory.delivery_min_order_cost" name="delivery_min_order_cost" class="form-control" placeholder="What's the minimum order cost that the factory is willing to do a delivery?"/>
+                        <span style="color:red;" v-show="errors.has('delivery_min_order_cost')">{{ errors.first('delivery_min_order_cost') }}</span>
                     </div>
-                    <input type="submit" value="Create"/>
+                    <input type="submit" value="Create" />
                 </form>
             </div>
             <template slot="modal-footer">
@@ -112,6 +118,7 @@
             </div>
         </b-modal>
 
+        <!-- New Factory Modal -->
         <div style='width:250px;height:80px;z-index:10;border-radius:5px;background-color:transparent;position:fixed;top:100px;'>
             <b-btn v-b-modal.newFactoryModal class="btn-new-factory btn btn-success btn-lg">
                 <i class="fa fa-plus"></i>New Factory
@@ -120,6 +127,7 @@
 
         <Masthead></Masthead>
 
+        <!-- Bootstrap table -->
         <b-container fluid>
             <!-- User Interface controls -->
             <b-row>
@@ -178,12 +186,13 @@
                     {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
                     </b-button>
                 </template>
+                <!-- Expanded row info -->
                 <template slot="row-details" slot-scope="row">
                     <b-card>
                         <b-col md="6" class="my-1">
                             <b-form-group horizontal label="Factory" class="mb-0">
                                 <b-input-group>
-                                    <b-form-input v-model="selected_factory.name" type="text" placeholder=""/>
+                                    <b-form-input v-model="selectedFactory.factory_name" type="text" placeholder=""/>
                                     <b-input-group-append>
                                     <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
                                     </b-input-group-append>
@@ -203,10 +212,12 @@
 </template>
 
 <style>
-body {
+body
+{
     background-color:#7e7e7e;
 }
-.modal-backdrop {
+.modal-backdrop
+{
     display: none;
 }
 </style>
@@ -214,20 +225,18 @@ body {
 <script>
 import Masthead from '../Masthead.vue'
 import { HttpClient } from '../../assets/js/HttpClient.js'
-import { SessionManager } from '../../assets/js/SessionManager.js'
-
-this.selected_factory =  {};
+import SessionManager from '../../assets/js/SessionManager.js'
 
 const factories =
 [
-  { name: 'Factory01', industry: 'jewelery', location: 'Johannesburg', email: 'default@email.com',
-    reg_num:'N/A', tax_num: 'N/A', range: 140.5, date_est: 0, date_joined: 0, isActive: true, visits: 40, sales: 30},
-    { name: 'Factory02', industry: 'electronics', location: 'Cape Town', email: 'default@email.com',
-    reg_num:'N/A', tax_num: 'N/A', range: 100.0, date_est: 0, date_joined: 0, isActive: true, visits: 400, sales: 340},
-    { name: 'Factory03', industry: 'hardware', location: 'Durban', email: 'default@email.com',
-    reg_num:'N/A', tax_num: 'N/A', range: 100.0, date_est: 0, date_joined: 0, isActive: true, visits: 400, sales: 340, _rowVariant: 'success'},
-    { name: 'Factory04', industry: 'pottery', location: 'Pretoria', email: 'default@email.com',
-    reg_num:'N/A', tax_num: 'N/A', range: 100.0, date_est: 0, date_joined: 0, isActive: true, visits: 400, sales: 340,_cellVariants: { range: 'danger', sales: 'warning' }},
+  { factory_name: 'Factory01', industry: 'jewelery', physical_address: 'Johannesburg', email: 'default@email.com',
+    registration_number:'N/A', tax_number: 'N/A', delivery_range: 140.5, date_established: 0, date_joined: 0, isActive: true, visits: 40, sales: 30},
+    { factory_name: 'Factory02', industry: 'electronics', physical_address: 'Cape Town', email: 'default@email.com',
+    registration_number:'N/A', tax_number: 'N/A', delivery_range: 100.0, date_established: 0, date_joined: 0, isActive: true, visits: 400, sales: 340},
+    { factory_name: 'Factory03', industry: 'hardware', physical_address: 'Durban', email: 'default@email.com',
+    registration_number:'N/A', tax_number: 'N/A', delivery_range: 100.0, date_established: 0, date_joined: 0, isActive: true, visits: 400, sales: 340, _rowVariant: 'success'},
+    { factory_name: 'Factory04', industry: 'pottery', physical_address: 'Pretoria', email: 'default@email.com',
+    registration_number:'N/A', tax_number: 'N/A', delivery_range: 100.0, date_established: 0, date_joined: 0, isActive: true, visits: 400, sales: 340,_cellVariants: { range: 'danger', sales: 'warning' }},
 ];
 
 export default
@@ -236,22 +245,41 @@ export default
     data()
     {
         return {
-            factory: { name: 'Factory05', industry: 'electronics', location: 'Johannesburg', email: 'default@email.com',
-                        reg_num:'N/A', tax_num: 'N/A', range: 100.0, date_est: 0, date_joined: 0, isActive: true, visits: 400, sales: 340},
+            newFactory:
+            {
+                factory_name: 'Factory05',
+                industry: 'electronics',
+                physical_address: '10 Mandela drive, Newtown, Johannesburg, South Africa',
+                email: 'default@email.com',
+                tel: '0',
+                registration_number: '',
+                tax_number: '',
+                delivery_range: 0.0,
+                delivery_min_order_cost: 0.0,
+                date_established: 0,
+                date_logged: 0,
+                rating: 0,
+                status: 0,
+                visits: 0,
+                sales: 0
+            },
             factories: factories,
-            fields: [
-                { key: 'name', label: 'Factory name', sortable: true },
+            fields:
+            [
+                { key: 'factory_name', label: 'Factory name', sortable: true },
                 { key: 'industry', label: 'Industry', sortable: true },
-                { key: 'location', label: 'Location', sortable: true },
+                { key: 'physical_address', label: 'Physical Address', sortable: true },
                 { key: 'email', label: 'eMail', sortable: true },
-                { key: 'reg_num', label: 'Registration No.', sortable: true },
-                { key: 'tax_num', label: 'Tax No.', sortable: true },
-                { key: 'range', label: 'Delivery Range', sortable: true },
-                { key: 'date_est', label: 'Date Established', sortable: true },
-                { key: 'date_joined', label: 'Date Joined', sortable: true },
+                { key: 'tel', label: 'Tel Number', sortable: true },
+                // { key: 'registration_number', label: 'Registration No.', sortable: true },
+                // { key: 'tax_number', label: 'Tax No.', sortable: true },
+                // { key: 'delivery_range', label: 'Delivery Range', sortable: true },
+                // { key: 'delivery_min_order_cost', label: 'Min order for delivery', sortable: true },
+                // { key: 'date_established', label: 'Date Established', sortable: true },
+                { key: 'date_logged', label: 'Date Joined', sortable: true },
                 { key: 'visits', label: 'Visits', sortable: true, 'class': 'text-center' },
                 { key: 'sales', label: 'Sale Count', sortable: true, 'class': 'text-center' },
-                { key: 'isActive', label: 'is Active' },
+                // { key: 'isActive', label: 'is Active' },
                 { key: 'actions', label: 'Actions' }
             ],
             currentPage: 1,
@@ -298,11 +326,13 @@ export default
             this.selected_factory =  item;
             // alert(JSON.stringify(this.selected_factory));
         },
-        resetModal () {
+        resetModal ()
+        {
             this.modalInfo.title = ''
             this.modalInfo.content = ''
         },
-        onFiltered (filteredItems) {
+        onFiltered (filteredItems)
+        {
             // Trigger pagination to update the number of buttons/pages due to filtering
             this.totalRows = filteredItems.length
             this.currentPage = 1
@@ -313,57 +343,44 @@ export default
             {
                 if (result)
                 {
-                    alert('creating factory');
                     // make an asynchronous call to create the product
-                    var str_date_est = this.factory.date_established;
-                    var date_est = new Date(str_date_est);
-                    this.factory.date_established = date_est.getTime();
+                    var date_established = new Date(this.newFactory.date_established);
+                    this.newFactory.date_established = date_established.getTime();
+                    this.newFactory.creator = SessionManager.getSessionUser().usr;
+                    this.newFactory.date_logged = new Date().getTime();
 
+                    // const HttpClient = require('../../assets/js/HttpClient.js');
                     // update session_id
-                    HttpClient.defaults.headers['session_id'] = this.session_id;
+                    // HttpClient.defaults.headers['session_id'] = this.session_id;
 
                     // PUT http://localhost:8080/factory
-                    HttpClient.put('factory', this.factory).then(response =>
-                    {
-                        alert(response.data);
-                        this.factory.date_established = str_date_est;// so that HTML5 can parse the date for the date picker
-                    }).catch(err =>
-                    {
-                        // this.errors.push(err);
-                        alert(err);
-                        this.factory.date_established = str_date_est;// so that HTML5 can parse the date for the date picker
-                    });
+                    HttpClient.put('/factory', this.newFactory)
+                        .then(response =>
+                        {
+                            console.log(response);
+                            alert('Successfully created new factory.');
+                            // this.newFactory.date_established = str_date_est;// so that HTML5 can parse the date for the date picker
+                        }).catch(err =>
+                        {
+                            // this.errors.push(err);
+                            alert(err);
+                        });
                     return;
                 }
-                alert('Please correct the displayed errors.');
+                // alert('Please correct the displayed errors.');
             });
         },
-        removeFactory(id) {
+        removeFactory(id)
+        {
             this.factories.splice(id,1);
         },
         newProduct(src)
         {
-          // set selected factory using global object
-          document.selected_factory = JSON.parse(src.id);
-          let cookie = document.cookie;
-          // let selected_prod = cookie.split(";");
-
-          // set defaults
-          if(cookie)
-          {
-            let selected_prod = getValueByKey(document.cookie, "fs_selected_product", ";", "::=");
-            alert(selected_prod);
-
-            if(selected_prod)
-            {
-              let brand_name = getValueByKey(selected_prod, "brand_name", "&", "=");
-              alert(brand_name);
-            }
-          }
+          
         },
         commitFactoryProduct()
         {
-          let brand_name = document.getElementById("new_prod_brand").value;//$("#new_prod_brand").value;
+          let brand_name = document.getElementById("new_prod_brand").value; // $("#new_prod_brand").value;
           let product_description = document.getElementById("new_prod_desc").value;
           let product_cost = document.getElementById("new_prod_cost").value;
           let product_unit = document.getElementById("new_prod_unit").value;
