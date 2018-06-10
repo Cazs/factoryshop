@@ -183,23 +183,152 @@
                     Info modal
                     </b-button>
                     <b-button class="factory-detail-toggle" size="sm" @click.stop="row.toggleDetails" @click="selectFactory(row.item, row.index, $event.target)">
-                    {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+                    {{ row.detailsShowing ? 'Collapse' : 'Expand' }}
                     </b-button>
                 </template>
                 <!-- Expanded row info -->
                 <template slot="row-details" slot-scope="row">
-                    <b-card>
-                        <b-col md="6" class="my-1">
-                            <b-form-group horizontal label="Factory" class="mb-0">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Factory:" class="mb-0">
                                 <b-input-group>
-                                    <b-form-input v-model="selectedFactory.factory_name" type="text" placeholder=""/>
+                                    <b-form-input v-model="selected_factory.factory_name" type="text" placeholder=""/>
                                     <b-input-group-append>
                                     <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
                                     </b-input-group-append>
                                 </b-input-group>
                             </b-form-group>
-                        </b-col>
-                    </b-card>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Industry:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.industry" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Physical Address:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.physical_address" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>    
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Tel No.:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.tel" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="eMail Address:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.email" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Date Est.:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.date_established" type="date" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Registration No.:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.registration_number" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Tax No.:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.tax_number" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Delivery Range:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.delivery_range" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Delivery Min Order Cost:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.delivery_min_order_cost" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Rating:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.rating" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <b-form-group horizontal label="Visits:" class="mb-0">
+                                <b-input-group>
+                                    <b-form-input v-model="selected_factory.visits" type="text" placeholder=""/>
+                                    <b-input-group-append>
+                                    <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                                    </b-input-group-append>
+                                </b-input-group>
+                            </b-form-group>
+                        </div>
+                    </div>
+                    <!-- <b-form-group horizontal label="Currency: " class="mb-0">
+                        <b-input-group>
+                            <b-form-input v-model="selected_factory.currency" type="text" placeholder=""/>
+                            <b-input-group-append>
+                            <b-btn :disabled="!filter" @click="filter = ''" style="z-index:0">Clear</b-btn>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </b-form-group> -->
                 </template>
             </b-table>
 

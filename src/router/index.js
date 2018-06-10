@@ -41,7 +41,7 @@ export default new Router({
       component: Factories
     },
     {
-      path: '/factory',
+      path: '/factory/:id',
       name: 'Factory',
       component: Factory
     },
